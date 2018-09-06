@@ -5,6 +5,12 @@
     <title>Three Geo A-Frame</title>
 	<script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
   <script src="https://cdn.rawgit.com/w3reality/three-geo/master/dist/three-geo.min.js"></script>
+  
+  <!-- Camera resize -->    
+  <script src="https://rawgit.com/fernandojsg/aframe-camera-transform-controls-component/master/dist/aframe-camera-transform-controls-component.js"></script>
+  
+  <!-- Environment -->
+  <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
 	
 	<script>
 		
@@ -20,7 +26,6 @@
 
 	  init: function () {
 	
-		    // scene = document.querySelector('#test-map').object3D;
         geoScene = this.el.object3D;
 
         if (this.data.axes_on){
@@ -59,7 +64,16 @@
 </head>
 <body>
  
-	<a-scene background="color: black">
+	<a-scene camera-transform-controls="">
+    
+    <a-entity environment="preset: checkerboard"></a-entity>
+    
+    <a-entity id="cameraRig">
+		    <a-camera position="0 1.4 0"></a-camera>
+        <a-entity id="lefthand" camera-transform-controls-hand="hand:left" vive-controls="hand: left" oculus-touch-controls="hand: left" windows-motion-controls="hand: left"></a-entity>
+        <a-entity id="righthand" camera-transform-controls-hand="hand:right" vive-controls="hand: right" oculus-touch-controls="hand: right" windows-motion-controls="hand: right"></a-entity>
+    </a-entity>
+    
     <a-entity id="first" map="token: pk.eyJ1Ijoia2FkZW5qcyIsImEiOiJjamxtcWF3NDIxYXZkM3dzMTZhYnE1dHNwIn0.cssVH1pM4KEQi345xdG8AQ;
                    lat: 46.5763;
                    lng: 7.9904;
@@ -67,7 +81,7 @@
                    zoom: 13;
                    axes_on: false;
                    "
-              rotation="-90 0 0" position="0 0.5 -3" scale="2 2 2"></a-entity>
+              rotation="-90 180 0" position="0 0.7 -1.5" scale="1 1 1"></a-entity>
     
 	</a-scene>
 	
